@@ -1,4 +1,4 @@
-const path = require('path');
+const config = require('config');
 const webpack = require('webpack');
 const HappyPack = require('happypack');
 const WebpackMerge = require('webpack-merge');
@@ -7,7 +7,7 @@ const ComConf = require('./webpack.common');
 module.exports = WebpackMerge(ComConf, {
   devtool: 'cheap-module-source-map',
   devServer: {
-    contentBase: path.resolve(__dirname, '../dist'),
+    contentBase: config.path.dist,
     compress: true,
     port: 9000,
     hot: true,

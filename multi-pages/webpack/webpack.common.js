@@ -1,20 +1,17 @@
 const path = require('path');
 const WebpackBar = require('webpackbar');
+const config = require('config');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const util = require('./util');
 
-const root = path.resolve(__dirname, '../');
-const rootPages = path.resolve(root, 'client/pages');
-const rootDist = path.resolve(root, 'dist');
-const pathHTML = path.resolve(root, 'client/template.html');
-
-const { entry, entryHTML } = util.getEntry(rootPages, pathHTML, 'vendors');
+const { root, pages, dist, html } = config.path;
+const { entry, entryHTML } = util.getEntry(pages, html, 'vendors');
 
 module.exports = {
   entry,
   output: {
-    path: rootDist,
+    path: dist,
     publicPath: '/',
     chunkFilename: '[name]-[chunkhash].js',
     filename: '[name]-[hash].js'
