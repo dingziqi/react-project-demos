@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "allowSyntheticDefaultImports": false,
+    "baseUrl": "./client",
+    "paths": {
+      "~imgs": ["static/imgs/*"],
+      "~components": ["components/*"],
+      "~styles": ["styles/*"],
+      "~utils": ["utils/*"]
+    }
+  },
+  "include": ["client/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

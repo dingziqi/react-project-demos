@@ -2,6 +2,8 @@ const config = require('config');
 const webpack = require('webpack');
 const HappyPack = require('happypack');
 const WebpackMerge = require('webpack-merge');
+const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
+
 const ComConf = require('./webpack.common');
 
 module.exports = WebpackMerge(ComConf, {
@@ -18,6 +20,11 @@ module.exports = WebpackMerge(ComConf, {
     //   maxChunks: 1
     // }),
     new webpack.HotModuleReplacementPlugin(),
+    new ExtractCssChunks({
+      filename: '[name].[hash].css',
+      chunkFilename: '[id].[hash].css',
+      orderWarning: false
+    }),
     new HappyPack({
       loaders: [
         {

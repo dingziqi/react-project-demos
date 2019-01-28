@@ -1,15 +1,15 @@
+const path = require('path');
 const config = require('config');
 const WebpackBar = require('webpackbar');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
-
 const util = require('./util');
 
-const { root, pages, dist, html } = config.path;
-const { entry, entryHTML } = util.getEntry(pages, html, 'vendors');
+const { root, dist, html } = config.path;
 
 module.exports = {
-  entry,
+  entry: path.resolve(root, 'client/index.jsx'),
   output: {
     path: dist,
     publicPath: '/',
@@ -47,9 +47,14 @@ module.exports = {
       }
     ]
   },
-  plugins: [new WebpackBar(), new FriendlyErrorsWebpackPlugin()].concat(
-    entryHTML
-  ),
+  plugins: [
+    new WebpackBar(),
+    new FriendlyErrorsWebpackPlugin(),
+    new HTMLWebpackPlugin({
+      template: html,
+      filename: path.join(dist, './index.html')
+    })
+  ],
   optimization: {
     splitChunks: {
       cacheGroups: {
