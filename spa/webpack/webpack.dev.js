@@ -7,13 +7,20 @@ const WebpackMerge = require('webpack-merge');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const ComConf = require('./webpack.common');
 
+const chalk = require('chalk');
+const error = require('debug')('app:error');
+
 const nvmrc = fs.readFileSync('.nvmrc', 'utf8');
 if (semver.satisfies(process.version, `<${nvmrc}`)) {
-  throw Error(
-    `you should use node@${nvmrc} for this project, current node version is ${
-      process.version
-    }`
+  error(
+    chalk.red.bold(
+      `you should use node@${nvmrc} for this project, current node version is ${
+        process.version
+      }`
+    )
   );
+
+  process.exit();
 }
 
 module.exports = WebpackMerge(ComConf, {
