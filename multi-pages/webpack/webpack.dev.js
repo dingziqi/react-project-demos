@@ -1,10 +1,21 @@
+const fs = require('fs');
 const config = require('config');
 const webpack = require('webpack');
+const semver = require('semver');
 const HappyPack = require('happypack');
 const WebpackMerge = require('webpack-merge');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 
 const ComConf = require('./webpack.common');
+
+const nvmrc = fs.readFileSync('.nvmrc', 'utf8');
+if (semver.satisfies(process.version, `<${nvmrc}`)) {
+  throw Error(
+    `you should use node@${nvmrc} for this project, current node version is ${
+      process.version
+    }`
+  );
+}
 
 module.exports = WebpackMerge(ComConf, {
   devtool: 'cheap-module-source-map',
