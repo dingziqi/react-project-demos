@@ -1,0 +1,7 @@
+{
+  "watch": ["./webpack/*", "./server/*"],
+  "env": {
+    "NODE_ENV": "development",
+    "isLocalDev": true
+  }
+}

@@ -1,16 +1,11 @@
 const fs = require('fs');
 const semver = require('semver');
-const config = require('config');
-const webpack = require('webpack');
 const HappyPack = require('happypack');
 const WebpackMerge = require('webpack-merge');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 
 const chalk = require('chalk');
-const debug = require('debug');
-const error = debug('app:error');
-
-debug.enable('app:*');
+const error = require('debug')('app:error');
 
 const ComConf = require('./webpack.common');
 
@@ -29,19 +24,15 @@ if (semver.satisfies(process.version, `<${nvmrc}`)) {
 
 module.exports = WebpackMerge(ComConf, {
   devtool: 'cheap-module-source-map',
-  devServer: {
-    contentBase: config.path.dist,
-    compress: true,
-    port: 9000,
-    hot: true,
-    stats: 'none'
-  },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    // new webpack.optimize.LimitChunkCountPlugin({
+    //   maxChunks: 1
+    // }),
     new ExtractCssChunks({
       filename: '[name].css',
       chunkFilename: '[id].css',
-      orderWarning: false
+      orderWarning: false,
+      hot: true
     }),
     new HappyPack({
       loaders: [
