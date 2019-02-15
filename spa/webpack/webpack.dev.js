@@ -8,7 +8,10 @@ const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const ComConf = require('./webpack.common');
 
 const chalk = require('chalk');
-const error = require('debug')('app:error');
+const debug = require('debug');
+const error = debug('app:error');
+
+debug.enable('app:*');
 
 const nvmrc = fs.readFileSync('.nvmrc', 'utf8');
 if (semver.satisfies(process.version, `<${nvmrc}`)) {

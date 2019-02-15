@@ -1,6 +1,3 @@
 {
-  "watch": ["./webpack/*"],
-  "env": {
-    "DEBUG": "app:*"
-  }
+  "watch": ["./webpack/*"]
 }

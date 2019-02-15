@@ -7,7 +7,10 @@ const WebpackMerge = require('webpack-merge');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 
 const chalk = require('chalk');
-const error = require('debug')('app:error');
+const debug = require('debug');
+const error = debug('app:error');
+
+debug.enable('app:*');
 
 const ComConf = require('./webpack.common');
 
